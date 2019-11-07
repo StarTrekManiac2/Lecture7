@@ -8,8 +8,9 @@ public class Lecturer extends Person
     private String jobTitle;
 
     /* CONSTRUCTOR */
-    public void setLecturer(int id, String title)
+    public void setLecturer(String fName, String lName, int age, int id, String title)
     {
+        setPerson(fName, lName, age);   // Grabs the other details from the SuperClass (Person)
         staffID = id;
         jobTitle = title;
     }
@@ -18,8 +19,10 @@ public class Lecturer extends Person
     /* GETTER */
     public void getLecturer()
     {
-        System.out.println("STAFF ID:\t" + staffID);
-        System.out.println("JOB TITLE:\t" + jobTitle);
+        System.out.println("STAFF ID:\t\t" + staffID);
+        System.out.println("JOB TITLE:\t\t" + jobTitle);
+        System.out.println("NAME:\t\t\t" + firstName + " " + lastName);
+        System.out.println("AGE:\t\t\t" + age);
     }
 
 }

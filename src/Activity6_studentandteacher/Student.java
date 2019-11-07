@@ -8,8 +8,9 @@ public class Student extends Person
     private String courseTitle;
 
     /* CONSTRUCTOR */
-    public void setStudent(int id, String title)
+    public void setStudent(String fName, String lName, int age, int id, String title)
     {
+        setPerson(fName, lName, age);   // Grabs the other details from the SuperClass (Person)
         studentID = id;
         courseTitle = title;
     }
@@ -20,6 +21,8 @@ public class Student extends Person
     {
         System.out.println("STUDENT ID:\t\t" + studentID);
         System.out.println("COURSE TITLE:\t" + courseTitle);
+        System.out.println("NAME:\t\t\t" + firstName + " " + lastName);
+        System.out.println("AGE:\t\t\t" + age);
     }
 
 }

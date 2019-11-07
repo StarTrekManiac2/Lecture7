@@ -4,17 +4,17 @@ public class Person
 {
 
     /* ATTRIBUTES */
-    private String firstName;
-    private String lastName;
-    private int age;
+    public String firstName;
+    public String lastName;
+    public int age;
 
 
     /* CONSTRUCTOR */
     public void setPerson(String fName, String lName, int age)
     {
-        firstName = fName;
-        lastName = lName;
-        age = age;
+        this.firstName = fName;
+        this.lastName = lName;
+        this.age = age;
     }
 
 
