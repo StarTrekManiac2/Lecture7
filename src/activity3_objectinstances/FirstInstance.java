@@ -1,4 +1,4 @@
-package objectinstances;
+package activity3_objectinstances;
 
 public class FirstInstance
 {
