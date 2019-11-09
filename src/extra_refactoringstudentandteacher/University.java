@@ -1,38 +1,87 @@
 package extra_refactoringstudentandteacher;
 
+import java.util.*;
+
 public class University
 {
 
+    /* *****************************
+     * GLOBAL VARIABLES
+     * *****************************/
+    private static Scanner s = new Scanner(System.in);
+    private static ArrayList<Student> studentList = new ArrayList<Student>();
+
+    private final static String MENU =
+            "======================================" + "\n" +
+            "=========== SYSTEM RUNNING ===========" + "\n" +
+            "======================================" + "\n" +
+            "Press '1' to Create New Student"           + "\n" +
+            "Press '2' to List All Students"         + "\n" +
+            "Press '3' to Search for Student";
+
+
+    /* *****************************
+     * MAIN
+     * *****************************/
     public static void main(String[] args)
     {
 
-        // Construct new instances of 'Lecturer' object and set attributes
-        Lecturer lecturerA = new Lecturer();
-        lecturerA.setLecturer("Tom", "Watkins", 49, 211, "Personal Tutor");
-        Lecturer lecturerB = new Lecturer();
-        lecturerB.setLecturer("Jane", "Allen", 33, 189, "Head of Department");
+        // Initialize main menu option variable
+        int choice = 0;
 
-        // Construct new instances of 'Student' object and set attributes
-        Student studentA = new Student();
-        studentA.setStudent("Chris", "Hill", 25, 82721, "Computer Science");
-        Student studentB = new Student();
-        studentB.setStudent("Adam", "Rhodes", 31, 82490, "Business & Management");
+        // Do-While loop for ensuring the program runs
+        do {
 
-        // Output the student and lecturer information
-        System.out.println("============================================================");
-        System.out.println("LECTURERS:");
-        System.out.println("============================================================");
-        lecturerA.getLecturer();
-        System.out.println("------------------------------");
-        lecturerB.getLecturer();
-        System.out.println("\n\n");
-        System.out.println("============================================================");
-        System.out.println("STUDENTS:");
-        System.out.println("============================================================");
-        studentA.getStudent();
-        System.out.println("------------------------------");
-        studentB.getStudent();
+            // Print the menu options
+            System.out.println(MENU);
 
+            // Record the choice inputted
+            choice = s.nextInt();
+
+            // IF-ELSE statements for option chosen
+            if (choice == 1)
+            {
+                createStudent();
+            }
+            else if (choice == 2)
+            {
+                listStudents();
+            }
+            else if (choice == 3)
+            {
+                findStudent();
+            }
+            else
+            {
+                System.out.println("Invalid Choice! Try again.");
+                choice = 0;
+            }
+
+        } while (choice != 0);
+
+    }
+
+
+    /* *****************************
+     * METHODS
+     * *****************************/
+
+    // Method for adding a new student to the student list
+    private static void createStudent()
+    {
+        System.out.println("UNFINISHED");
+    }
+
+    // Method for listing all students from the student list
+    private static void listStudents()
+    {
+        System.out.println("UNFINISHED");
+    }
+
+    // Method for finding a student in the student list
+    private static void findStudent()
+    {
+        System.out.println("UNFINISHED");
     }
 
 }
