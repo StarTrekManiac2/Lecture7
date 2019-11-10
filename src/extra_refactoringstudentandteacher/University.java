@@ -57,6 +57,12 @@ public class University
             // SWITCH statement for option chosen
             switch (choice)
             {
+                case 0:
+                    typewriteEffect("\n\nEnding Program...");
+                    typewriteEffect("\n.................");
+                    typewriteEffect("\n... Programming Ending\n\n\n\n\n");
+                    break;
+
                 case 1:
                     typewriteEffect("\n=== CREATE A NEW STUDENT ===");
                     createStudent();
@@ -70,6 +76,11 @@ public class University
                 case 3:
                     typewriteEffect("\n=== SEARCH FOR STUDENT(S) ===");
                     findStudent();
+                    break;
+
+                case 4:
+                    typewriteEffect("\n=== EDIT STUDENT RECORD ===");
+                    editStudent();
                     break;
 
                 default:
@@ -141,17 +152,16 @@ public class University
         typewriteEffect("\n\t2. Search by Course Title");
         typewriteEffect("\n\t3. Search by Surname\n");
 
-        int choice = s.nextInt();
+        String choice = s.next();
 
-        if (choice == 1)
+        if (choice.equals("1") || choice.equals("id"))
         {
             typewriteEffect("\nEnter Student ID:\n");
             int id = s.nextInt();
+            int resultCount = 0;
 
             for (int i=0; i<studentList.size(); i++)
             {
-                int resultCount = 0;
-
                 if (studentList.get(i).get_StudentID() == id)
                 {
                     resultCount++;
@@ -162,17 +172,21 @@ public class University
                     typewriteEffect("\n\n\n\n\n");
                 }
             }
+
+            if (resultCount == 0)
+            {
+                typewriteEffect("\n\nNo Results Found!\n\n\n");
+            }
         }
-        else if (choice == 2)
+        else if (choice.equals("2") || choice.equals("title"))
         {
             typewriteEffect("\nEnter Course Title:\n");
             String title;
             title = s.next().concat(s.nextLine());
+            int resultCount = 0;
 
             for (int i=0; i<studentList.size(); i++)
             {
-                int resultCount = 0;
-
                 if (studentList.get(i).get_CourseTitle().equals(title))
                 {
                     resultCount++;
@@ -183,16 +197,20 @@ public class University
                     typewriteEffect("\n\n\n\n\n");
                 }
             }
+
+            if (resultCount == 0)
+            {
+                typewriteEffect("\n\nNo Results Found!\n\n\n");
+            }
         }
-        else if (choice == 3)
+        else if (choice.equals("3") || choice.equals("surname"))
         {
             typewriteEffect("\nEnter Surname:\n");
             String lName = s.next();
+            int resultCount = 0;
 
             for (int i=0; i<studentList.size(); i++)
             {
-                int resultCount = 0;
-
                 if (studentList.get(i).get_LastName().equals(lName))
                 {
                     resultCount++;
@@ -203,12 +221,44 @@ public class University
                     typewriteEffect("\n\n\n\n\n");
                 }
             }
+
+            if (resultCount == 0)
+            {
+                typewriteEffect("\n\nNo Results Found!\n\n\n");
+            }
         }
         else
         {
-            typewriteEffect("\n\n\n\nInvalid Choice! Try again." + LINES);
+            typewriteEffect("\n\n\n\nInvalid Choice! Try again.\n\n\n");
         }
     }
+
+
+    // Method to edit a record within the Student List
+    private static void editStudent()
+    {
+        typewriteEffect("\nEnter Student ID:\n");
+        int id = s.nextInt();
+        boolean exists = false;
+
+        for (int i=0; i<studentList.size(); i++)
+        {
+            if (studentList.get(i).get_StudentID() == id)
+            {
+                typewriteEffect("\n\nFound record successfully!\n\n");
+                exists = true;
+
+                // DO STUFF TO EDIT THIS RECORD
+            }
+        }
+
+        if (!exists)
+        {
+            typewriteEffect("\n\n No record found. Try again!\n\n\n\n");
+        }
+    }
+
+
 
 
     // Console typewriter effect - essentially replaces 'SOUT'

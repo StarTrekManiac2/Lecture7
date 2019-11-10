@@ -6,8 +6,6 @@ students and lecturers, as well as print them out as per request of the user
 input (similar to the Calculator task).
 
 TO-DO LIST:
-    - Finish 'Search' functionality
-        > Consider options for search methods (e.g. by ID, by name, by course)
     - Implement 'Delete' functionality
     - Implement 'Edit' functionality
     - Implement all functionality for 'Lecturers' (none of which is yet implemented)
