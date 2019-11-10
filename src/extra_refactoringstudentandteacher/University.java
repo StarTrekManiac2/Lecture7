@@ -23,7 +23,7 @@ public class University
             "======================================" + "\n" +
             "=========== SYSTEM RUNNING ===========" + "\n" +
             "======================================" + "\n" +
-            "Press '1' to Create New Student"           + "\n" +
+            "Press '1' to Create New Student"        + "\n" +
             "Press '2' to List All Students"         + "\n" +
             "Press '3' to Search for Student";
 
@@ -136,7 +136,73 @@ public class University
     // Method for finding a student in the student list
     private static void findStudent()
     {
-        typewriteEffect("UNFINISHED");
+        typewriteEffect("\nHow would you like to search?");
+        typewriteEffect("\n\t1. Search by Student ID");
+        typewriteEffect("\n\t2. Search by Course Title");
+        typewriteEffect("\n\t3. Search by Surname\n");
+
+        int choice = s.nextInt();
+
+        if (choice == 1)
+        {
+            typewriteEffect("\nEnter Student ID:\n");
+            int id = s.nextInt();
+
+            for (int i=0; i<studentList.size(); i++)
+            {
+                if (studentList.get(i).get_StudentID() == id)
+                {
+                    typewriteEffect("\n\nFound Results!\n");
+                    typewriteEffect("\n" + (i+1) + ".\n");
+                    studentList.get(i).getStudentDetails();
+                    typewriteEffect("\n");
+                }
+                else
+                {
+                    typewriteEffect("\n\n No Results Found!\n");
+                }
+            }
+        }
+        else if (choice == 2)
+        {
+            typewriteEffect("\nEnter Course Title:\n");
+            String title = s.next().concat(s.nextLine());
+
+            for (int i=0; i<studentList.size(); i++)
+            {
+                if (studentList.get(i).get_CourseTitle().equals(title))
+                {
+                    typewriteEffect("\n\nFound Results!\n");
+                    typewriteEffect("\n" + (i+1) + ".\n");
+                    studentList.get(i).getStudentDetails();
+                    typewriteEffect("\n");
+                }
+                else
+                {
+                    typewriteEffect("\n\n No Results Found!\n");
+                }
+            }
+        }
+        else if (choice == 3)
+        {
+            typewriteEffect("\nEnter Surname:\n");
+            String lName = s.next();
+
+            for (int i=0; i<studentList.size(); i++)
+            {
+                if (studentList.get(i).get_LastName().equals(lName))
+                {
+                    typewriteEffect("\n\nFound Results!\n");
+                    typewriteEffect("\n" + (i+1) + ".\n");
+                    studentList.get(i).getStudentDetails();
+                    typewriteEffect("\n");
+                }
+                else
+                {
+                    typewriteEffect("\n\n No Results Found!\n");
+                }
+            }
+        }
     }
 
 
