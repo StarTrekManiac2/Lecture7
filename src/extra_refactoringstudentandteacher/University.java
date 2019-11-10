@@ -150,36 +150,37 @@ public class University
 
             for (int i=0; i<studentList.size(); i++)
             {
+                int resultCount = 0;
+
                 if (studentList.get(i).get_StudentID() == id)
                 {
-                    typewriteEffect("\n\nFound Results!\n");
-                    typewriteEffect("\n" + (i+1) + ".\n");
-                    studentList.get(i).getStudentDetails();
-                    typewriteEffect("\n");
-                }
-                else
-                {
-                    typewriteEffect("\n\n No Results Found!\n");
+                    resultCount++;
+                    Student current = studentList.get(i);
+                    typewriteEffect("\n\nFound " + resultCount + " Results!\n");
+                    typewriteEffect("\n\n");
+                    typewriteEffect(resultCount + ".\n" + current.getStudentDetails());
+                    typewriteEffect("\n\n\n\n\n");
                 }
             }
         }
         else if (choice == 2)
         {
             typewriteEffect("\nEnter Course Title:\n");
-            String title = s.next().concat(s.nextLine());
+            String title;
+            title = s.next().concat(s.nextLine());
 
             for (int i=0; i<studentList.size(); i++)
             {
+                int resultCount = 0;
+
                 if (studentList.get(i).get_CourseTitle().equals(title))
                 {
-                    typewriteEffect("\n\nFound Results!\n");
-                    typewriteEffect("\n" + (i+1) + ".\n");
-                    studentList.get(i).getStudentDetails();
-                    typewriteEffect("\n");
-                }
-                else
-                {
-                    typewriteEffect("\n\n No Results Found!\n");
+                    resultCount++;
+                    Student current = studentList.get(i);
+                    typewriteEffect("\n\nFound " + resultCount + " Results!\n");
+                    typewriteEffect("\n\n");
+                    typewriteEffect(resultCount + ".\n" + current.getStudentDetails());
+                    typewriteEffect("\n\n\n\n\n");
                 }
             }
         }
@@ -190,18 +191,22 @@ public class University
 
             for (int i=0; i<studentList.size(); i++)
             {
+                int resultCount = 0;
+
                 if (studentList.get(i).get_LastName().equals(lName))
                 {
-                    typewriteEffect("\n\nFound Results!\n");
-                    typewriteEffect("\n" + (i+1) + ".\n");
-                    studentList.get(i).getStudentDetails();
-                    typewriteEffect("\n");
-                }
-                else
-                {
-                    typewriteEffect("\n\n No Results Found!\n");
+                    resultCount++;
+                    Student current = studentList.get(i);
+                    typewriteEffect("\n\nFound " + resultCount + " Results!\n");
+                    typewriteEffect("\n\n");
+                    typewriteEffect(resultCount + ".\n" + current.getStudentDetails());
+                    typewriteEffect("\n\n\n\n\n");
                 }
             }
+        }
+        else
+        {
+            typewriteEffect("\n\n\n\nInvalid Choice! Try again." + LINES);
         }
     }
 
