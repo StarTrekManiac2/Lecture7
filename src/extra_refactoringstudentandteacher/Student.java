@@ -24,15 +24,33 @@ public class Student extends Person
     /* *****************************
      * GETTERS
      * *****************************/
-    public int getLecturer_StudentID() { return this.studentID; }
-    public String getLecturer_JobTitle() { return this.courseTitle; }
+    public int get_StudentID() { return this.studentID; }
+    public String get_CourseTitle() { return this.courseTitle; }
 
 
     /* *****************************
      * SETTERS
      * *****************************/
-    public void setLecturer_StaffID(int id) { this.studentID = id; }
-    public void setLecturer_JobTitle(String title) { this.courseTitle = title; }
+    public void set_StudentID(int id) { this.studentID = id; }
+    public void set_CourseTitle(String title) { this.courseTitle = title; }
 
+
+    /* *****************************
+     * OTHER METHODS
+     * *****************************/
+    // Output student details in full
+    public String getStudentDetails()
+    {
+        String fName = this.get_FirstName();
+        String lName = this.get_LastName();
+        int age = this.get_Age();
+        int id = this.get_StudentID();
+        String title = this.get_CourseTitle();
+
+        return "ID:\t\t\t\t\t" + id  +
+                "\nName:\t\t\t\t" + lName + ", " + fName +
+                "\nAge:\t\t\t\t" + age +
+                "\nCourse Title:\t\t" + title;
+    }
 
 }

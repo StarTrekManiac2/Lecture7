@@ -24,16 +24,16 @@ public class Person
     /* *****************************
      * GETTERS
      * *****************************/
-    public String getPerson_FirstName() { return this.firstName; }
-    public String getPerson_LastName() { return this.lastName; }
-    public int getPerson_Age() { return this.age; }
+    public String get_FirstName() { return this.firstName; }
+    public String get_LastName() { return this.lastName; }
+    public int get_Age() { return this.age; }
 
 
     /* *****************************
      * SETTERS
      * *****************************/
-    public void setPerson_FirstName(String fName) { this.firstName = fName; }
-    public void setPerson_LastName(String lName) { this.lastName = lName; }
-    public void setPerson_Age(int age) { this.age = age; }
+    public void set_FirstName(String fName) { this.firstName = fName; }
+    public void set_LastName(String lName) { this.lastName = lName; }
+    public void set_Age(int age) { this.age = age; }
 
 }

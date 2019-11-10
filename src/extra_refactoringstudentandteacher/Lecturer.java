@@ -24,14 +24,14 @@ public class Lecturer extends Person
     /* *****************************
      * GETTERS
      * *****************************/
-    public int getLecturer_StaffID() { return this.staffID; }
-    public String getLecturer_JobTitle() { return this.jobTitle; }
+    public int get_StaffID() { return this.staffID; }
+    public String get_JobTitle() { return this.jobTitle; }
 
 
     /* *****************************
      * SETTERS
      * *****************************/
-    public void setLecturer_StaffID(int id) { this.staffID = id; }
-    public void setLecturer_JobTitle(String title) { this.jobTitle = title; }
+    public void set_StaffID(int id) { this.staffID = id; }
+    public void set_JobTitle(String title) { this.jobTitle = title; }
 
 }

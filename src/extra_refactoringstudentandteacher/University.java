@@ -2,6 +2,13 @@ package extra_refactoringstudentandteacher;
 
 import java.util.*;
 
+/* **********************************************************************************************
+ * **********************************************************************************************
+ *  INCOMPLETE
+ *      - See ReadMe.txt for To-Do List
+ * **********************************************************************************************
+ ***********************************************************************************************/
+
 public class University
 {
 
@@ -11,6 +18,7 @@ public class University
     private static Scanner s = new Scanner(System.in);
     private static ArrayList<Student> studentList = new ArrayList<Student>();
 
+    private final static String LINES = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     private final static String MENU =
             "======================================" + "\n" +
             "=========== SYSTEM RUNNING ===========" + "\n" +
@@ -26,35 +34,47 @@ public class University
     public static void main(String[] args)
     {
 
+        // Populate student list with sample students
+        Student sampleA = new Student("Christopher", "Hill", 25, 20155985, "Computer Science");
+        Student sampleB = new Student("Jodie", "Lewis", 21, 20152900, "Psychology");
+        Student sampleC = new Student("Alexander", "Wisse", 31, 20159112, "Arts");
+        studentList.add(sampleA);
+        studentList.add(sampleB);
+        studentList.add(sampleC);
+
         // Initialize main menu option variable
-        int choice = 0;
+        int choice;
 
         // Do-While loop for ensuring the program runs
         do {
 
-            // Print the menu options
-            System.out.println(MENU);
+            // Clear console and print the menu options
+            typewriteEffect(MENU + "\n");
 
             // Record the choice inputted
             choice = s.nextInt();
 
-            // IF-ELSE statements for option chosen
-            if (choice == 1)
+            // SWITCH statement for option chosen
+            switch (choice)
             {
-                createStudent();
-            }
-            else if (choice == 2)
-            {
-                listStudents();
-            }
-            else if (choice == 3)
-            {
-                findStudent();
-            }
-            else
-            {
-                System.out.println("Invalid Choice! Try again.");
-                choice = 0;
+                case 1:
+                    typewriteEffect("\n=== CREATE A NEW STUDENT ===");
+                    createStudent();
+                    break;
+
+                case 2:
+                    typewriteEffect("\n=== LIST OF ALL STUDENTS ===");
+                    listStudents();
+                    break;
+
+                case 3:
+                    typewriteEffect("\n=== SEARCH FOR STUDENT(S) ===");
+                    findStudent();
+                    break;
+
+                default:
+                    typewriteEffect("\nInvalid Choice! Try again.");
+                    break;
             }
 
         } while (choice != 0);
@@ -69,19 +89,72 @@ public class University
     // Method for adding a new student to the student list
     private static void createStudent()
     {
-        System.out.println("UNFINISHED");
+        // Declare variables for storing inputs
+        String fName;
+        String lName;
+        String title;
+        int age;
+        int id;
+
+        // Get user inputs and store them to variable
+        typewriteEffect("\nFirst Name:\n");
+            fName = s.next();
+        typewriteEffect("\nLast Name:\n");
+            lName = s.next();
+        typewriteEffect("\nAge:\n");
+            age = s.nextInt();
+        typewriteEffect("\nID Number:\n");
+            id = s.nextInt();
+        typewriteEffect("\nCourse Title:\n");
+            title = s.next().concat(s.nextLine());  // Needed to register whitespace and prevent errors
+
+        // Apply inputs to a new student instance, then add to the student list
+        Student newStudent = new Student(fName, lName, age, id, title);
+        studentList.add(newStudent);
+
+        // Output success
+        typewriteEffect("\nNew Student Created successfully!");
+        typewriteEffect(LINES);
     }
+
 
     // Method for listing all students from the student list
     private static void listStudents()
     {
-        System.out.println("UNFINISHED");
+        // FOR loop to iterate through entire list of students
+        for (int i=0; i<studentList.size(); i++)
+        {
+            // Output their details by calling the method to print full details
+            typewriteEffect("\n" + (i+1) + ".\n" + studentList.get(i).getStudentDetails() + "\n");
+        }
+
+        // Output success
+        typewriteEffect("\n\nCompleted listing all students!\n\n\n\n\n\n");
     }
+
 
     // Method for finding a student in the student list
     private static void findStudent()
     {
-        System.out.println("UNFINISHED");
+        typewriteEffect("UNFINISHED");
+    }
+
+
+    // Console typewriter effect - essentially replaces 'SOUT'
+    private static void typewriteEffect(String output)
+    {
+        for (int i=0; i<output.length(); i++)
+        {
+            System.out.printf("%c", output.charAt(i));
+            try
+            {
+                Thread.sleep(15);  // 0.005 second pause
+            }
+            catch (InterruptedException e)
+            {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
 }
