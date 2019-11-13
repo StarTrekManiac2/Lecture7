@@ -2,19 +2,12 @@ package extra_refactoringstudentandteacher;
 
 import java.util.*;
 
-/* **********************************************************************************************
- * **********************************************************************************************
- *  INCOMPLETE
- *      - See ReadMe.txt for To-Do List
- * **********************************************************************************************
- ***********************************************************************************************/
-
 public class University
 {
 
-    /* *****************************
+    /* ******************************************************************************************
      * GLOBAL VARIABLES
-     * *****************************/
+     */
 
     // Declarations
     private static Scanner s = new Scanner(System.in);
@@ -32,9 +25,10 @@ public class University
             "\tTo Quit, Press '0'";
 
 
-    /* *****************************
-     * MAIN
-     * *****************************/
+
+    /* ******************************************************************************************
+     * MAIN METHOD
+     */
 
     public static void main(String[] args)
     {
@@ -97,9 +91,10 @@ public class University
     }
 
 
-    /* *****************************
-     * METHODS
-     * *****************************/
+
+    /* ******************************************************************************************
+     * PRIMARY METHODS
+     */
 
     /* CREATE A NEW STUDENT */
     private static void createStudent()
@@ -332,8 +327,11 @@ public class University
 
 
 
+    /* ******************************************************************************************
+     * SECONDARY METHODS
+     */
 
-    /* EXTRA METHOD - TYPE-WRITER EFFECT FOR CONSOLE */
+//    /* TYPE-WRITER EFFECT FOR CONSOLE */
 //    private static void typewriteEffect(String output)
 //    {
 //        for (int i=0; i<output.length(); i++)
