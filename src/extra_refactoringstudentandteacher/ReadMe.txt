@@ -7,7 +7,9 @@ input (similar to the Calculator task).
 
 TO-DO LIST:
     - Implement 'Delete' functionality
-    - Implement 'Edit' functionality
+    - Validate all possible variables and issues:
+        > General range-checking for int inputs
+        > Options where required (e.g. if more than 1 result, user must choose which result to edit/delete/etc)
     - Implement all functionality for 'Lecturers' (none of which is yet implemented)
     - Implement the following ideas as a bonus:
         > Assign Lecturers to the course they teach
@@ -15,3 +17,13 @@ TO-DO LIST:
               (e.g. Course ID, Title, Description, Semester Length, etc)
         > Assign Lecturers as 'Personal Tutor' attribute for Students
         > Ability to list individual Lecturer's list of Students that they teach/tutor as per the above
+
+
+COMPLETED:
+    - Student portal
+        > 'Edit' functionality
+            > Multiple choices of attributes to edit
+        > 'Create' functionality
+        > 'List' functionality
+        > 'Search' functionality
+            > Multiple choices of search method
