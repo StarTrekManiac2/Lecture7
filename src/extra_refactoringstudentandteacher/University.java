@@ -15,26 +15,31 @@ public class University
     /* *****************************
      * GLOBAL VARIABLES
      * *****************************/
-    private static Scanner s = new Scanner(System.in);
-    private static ArrayList<Student> studentList = new ArrayList<Student>();
 
-    private final static String LINES = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    // Declarations
+    private static Scanner s = new Scanner(System.in);
+    private static ArrayList<Student> studentList = new ArrayList<>();
+
+    // Constants
     private final static String MENU =
             "======================================" + "\n" +
             "=========== SYSTEM RUNNING ===========" + "\n" +
             "======================================" + "\n" +
             "Press '1' to Create New Student"        + "\n" +
             "Press '2' to List All Students"         + "\n" +
-            "Press '3' to Search for Student";
+            "Press '3' to Search for Student"        + "\n" +
+            "Press '4' to Edit a Student Record"     + "\n" +
+            "\tTo Quit, Press '0'";
 
 
     /* *****************************
      * MAIN
      * *****************************/
+
     public static void main(String[] args)
     {
 
-        // Populate student list with sample students
+        // Populate array-list with sample data
         Student sampleA = new Student("Christopher", "Hill", 25, 20155985, "Computer Science");
         Student sampleB = new Student("Jodie", "Lewis", 21, 20152900, "Psychology");
         Student sampleC = new Student("Alexander", "Wisse", 31, 20159112, "Arts");
@@ -42,49 +47,48 @@ public class University
         studentList.add(sampleB);
         studentList.add(sampleC);
 
-        // Initialize main menu option variable
         int choice;
 
-        // Do-While loop for ensuring the program runs
+        // Loop ensures the program runs until user inputs '0' as main menu choice
         do {
 
-            // Clear console and print the menu options
-            typewriteEffect(MENU + "\n");
-
-            // Record the choice inputted
+            System.out.println(MENU);
             choice = s.nextInt();
 
-            // SWITCH statement for option chosen
             switch (choice)
             {
+                // Closes the program
                 case 0:
-                    typewriteEffect("\n\nEnding Program...");
-                    typewriteEffect("\n.................");
-                    typewriteEffect("\n... Programming Ending\n\n\n\n\n");
+                    System.out.println("Ending Program................");
                     break;
 
+                // Create New Student via method call
                 case 1:
-                    typewriteEffect("\n=== CREATE A NEW STUDENT ===");
+                    System.out.println("=== CREATE A NEW STUDENT ===");
                     createStudent();
                     break;
 
+                // List All Students in array-list via method call
                 case 2:
-                    typewriteEffect("\n=== LIST OF ALL STUDENTS ===");
+                    System.out.println("=== LIST OF ALL STUDENTS ===");
                     listStudents();
                     break;
 
+                // Search For Student in array-list via method call
                 case 3:
-                    typewriteEffect("\n=== SEARCH FOR STUDENT(S) ===");
+                    System.out.println("=== SEARCH FOR STUDENT(S) ===");
                     findStudent();
                     break;
 
+                // Edit Student Record via method call
                 case 4:
-                    typewriteEffect("\n=== EDIT STUDENT RECORD ===");
+                    System.out.println("=== EDIT STUDENT RECORD ===");
                     editStudent();
                     break;
 
+                // Erroneous input
                 default:
-                    typewriteEffect("\nInvalid Choice! Try again.");
+                    System.out.println("\nInvalid Choice! Try again.");
                     break;
             }
 
@@ -97,185 +101,256 @@ public class University
      * METHODS
      * *****************************/
 
-    // Method for adding a new student to the student list
+    /* CREATE A NEW STUDENT */
     private static void createStudent()
     {
-        // Declare variables for storing inputs
-        String fName;
-        String lName;
-        String title;
-        int age;
-        int id;
+        System.out.println("First Name:");
+        String fName = s.next();
 
-        // Get user inputs and store them to variable
-        typewriteEffect("\nFirst Name:\n");
-            fName = s.next();
-        typewriteEffect("\nLast Name:\n");
-            lName = s.next();
-        typewriteEffect("\nAge:\n");
-            age = s.nextInt();
-        typewriteEffect("\nID Number:\n");
-            id = s.nextInt();
-        typewriteEffect("\nCourse Title:\n");
-            title = s.next().concat(s.nextLine());  // Needed to register whitespace and prevent errors
+        System.out.println("Last Name:");
+        String lName = s.next();
 
-        // Apply inputs to a new student instance, then add to the student list
+        System.out.println("Age:");
+        int age = s.nextInt();
+
+        System.out.println("ID Number:");
+        int id = s.nextInt();
+
+        System.out.println("Course Title:");
+        String title = s.next().concat(s.nextLine());  // registers a space
+
         Student newStudent = new Student(fName, lName, age, id, title);
         studentList.add(newStudent);
 
-        // Output success
-        typewriteEffect("\nNew Student Created successfully!");
-        typewriteEffect(LINES);
+        System.out.println("\nNew Student Created successfully!");
     }
 
 
-    // Method for listing all students from the student list
+    /* LIST ALL STUDENTS */
     private static void listStudents()
     {
-        // FOR loop to iterate through entire list of students
         for (int i=0; i<studentList.size(); i++)
         {
-            // Output their details by calling the method to print full details
-            typewriteEffect("\n" + (i+1) + ".\n" + studentList.get(i).getStudentDetails() + "\n");
+            String currentDetails = studentList.get(i).getStudentDetails();
+            System.out.println((i+1) + ".\n" + currentDetails + "\n");
         }
 
-        // Output success
-        typewriteEffect("\n\nCompleted listing all students!\n\n\n\n\n\n");
+        System.out.println("\nCompleted listing all students!");
     }
 
 
-    // Method for finding a student in the student list
+    /* FIND A STUDENT IN THE LIST */
     private static void findStudent()
     {
-        typewriteEffect("\nHow would you like to search?");
-        typewriteEffect("\n\t1. Search by Student ID");
-        typewriteEffect("\n\t2. Search by Course Title");
-        typewriteEffect("\n\t3. Search by Surname\n");
+        System.out.println("\nHow would you like to search?");
+        System.out.println("\t1. Search by Student ID");
+        System.out.println("\t2. Search by Course Title");
+        System.out.println("\t3. Search by Surname");
 
-        String choice = s.next();
+        int choice = s.nextInt();
+        int resultCount;
 
-        if (choice.equals("1") || choice.equals("id"))
+        switch (choice)
         {
-            typewriteEffect("\nEnter Student ID:\n");
-            int id = s.nextInt();
-            int resultCount = 0;
+            case 1:     // IF Searching by ID
+                System.out.println("\nEnter Student ID:");
+                int id = s.nextInt();
+                resultCount = 0;
 
-            for (int i=0; i<studentList.size(); i++)
-            {
-                if (studentList.get(i).get_StudentID() == id)
+                for (Student currentStudent : studentList)
                 {
-                    resultCount++;
-                    Student current = studentList.get(i);
-                    typewriteEffect("\n\nFound " + resultCount + " Results!\n");
-                    typewriteEffect("\n\n");
-                    typewriteEffect(resultCount + ".\n" + current.getStudentDetails());
-                    typewriteEffect("\n\n\n\n\n");
+                    if (currentStudent.get_StudentID() == id)
+                    {
+                        resultCount++;
+                        System.out.println(resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
+                    }
                 }
-            }
 
-            if (resultCount == 0)
-            {
-                typewriteEffect("\n\nNo Results Found!\n\n\n");
-            }
-        }
-        else if (choice.equals("2") || choice.equals("title"))
-        {
-            typewriteEffect("\nEnter Course Title:\n");
-            String title;
-            title = s.next().concat(s.nextLine());
-            int resultCount = 0;
-
-            for (int i=0; i<studentList.size(); i++)
-            {
-                if (studentList.get(i).get_CourseTitle().equals(title))
+                if (resultCount == 0)
                 {
-                    resultCount++;
-                    Student current = studentList.get(i);
-                    typewriteEffect("\n\nFound " + resultCount + " Results!\n");
-                    typewriteEffect("\n\n");
-                    typewriteEffect(resultCount + ".\n" + current.getStudentDetails());
-                    typewriteEffect("\n\n\n\n\n");
+                    System.out.println("\nNo Results Found!");
                 }
-            }
-
-            if (resultCount == 0)
-            {
-                typewriteEffect("\n\nNo Results Found!\n\n\n");
-            }
-        }
-        else if (choice.equals("3") || choice.equals("surname"))
-        {
-            typewriteEffect("\nEnter Surname:\n");
-            String lName = s.next();
-            int resultCount = 0;
-
-            for (int i=0; i<studentList.size(); i++)
-            {
-                if (studentList.get(i).get_LastName().equals(lName))
+                else
                 {
-                    resultCount++;
-                    Student current = studentList.get(i);
-                    typewriteEffect("\n\nFound " + resultCount + " Results!\n");
-                    typewriteEffect("\n\n");
-                    typewriteEffect(resultCount + ".\n" + current.getStudentDetails());
-                    typewriteEffect("\n\n\n\n\n");
+                    System.out.println("\nFound " + resultCount + " Results!");
                 }
-            }
 
-            if (resultCount == 0)
+                break;
+
+            case 2:     // IF Searching by Course Title
+                System.out.println("\nEnter Course Title:");
+                String title = s.next().concat(s.nextLine());
+                resultCount = 0;
+
+                for (Student currentStudent : studentList)
+                {
+                    if (currentStudent.get_CourseTitle().equals(title))
+                    {
+                        resultCount++;
+                        System.out.println(resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
+                    }
+                }
+
+                if (resultCount == 0)
+                {
+                    System.out.println("\nNo Results Found!");
+                }
+                else
+                {
+                    System.out.println("\nFound " + resultCount + " Results!");
+                }
+
+                break;
+
+            case 3:     // IF Searching by Surname
             {
-                typewriteEffect("\n\nNo Results Found!\n\n\n");
+                System.out.println("\nEnter Surname:");
+                String lName = s.next();
+                resultCount = 0;
+
+                for (Student currentStudent : studentList)
+                {
+                    if (currentStudent.get_LastName().equals(lName))
+                    {
+                        resultCount++;
+                        System.out.println(resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
+                    }
+                }
+
+                if (resultCount == 0)
+                {
+                    System.out.println("\nNo Results Found!");
+                }
+                else
+                {
+                    System.out.println("\nFound " + resultCount + " Results!");
+                }
+
+                break;
             }
-        }
-        else
-        {
-            typewriteEffect("\n\n\n\nInvalid Choice! Try again.\n\n\n");
+            default:
+                System.out.println("\nInvalid Choice! Try again.");
+                break;
         }
     }
 
 
-    // Method to edit a record within the Student List
+    /* EDIT A STUDENT RECORD */
     private static void editStudent()
     {
-        typewriteEffect("\nEnter Student ID:\n");
+        System.out.println("\nEnter Student ID:");
         int id = s.nextInt();
         boolean exists = false;
+        int element = 0;
 
         for (int i=0; i<studentList.size(); i++)
         {
             if (studentList.get(i).get_StudentID() == id)
             {
-                typewriteEffect("\n\nFound record successfully!\n\n");
+                System.out.println("\nFound record successfully!");
                 exists = true;
-
-                // DO STUFF TO EDIT THIS RECORD
+                element = i;
             }
         }
 
-        if (!exists)
+        // IF there is a match
+        if (exists)
         {
-            typewriteEffect("\n\n No record found. Try again!\n\n\n\n");
+            Student currentStudent = studentList.get(element);
+
+            System.out.println("CURRENT RECORD:\n" + studentList.get(element).getStudentDetails() + "\n");
+            System.out.println("\nWhat do you need to edit?");
+            System.out.println("\t1. Edit Student ID");
+            System.out.println("\t2. Edit Course Title");
+            System.out.println("\t3. Edit Names");
+            System.out.println("\t4. Edit Age");
+            System.out.println("\t\t or press '0' to quit!");
+
+            int choice = s.nextInt();
+
+            switch (choice)
+            {
+                case 1:     // IF editing Student ID
+                    System.out.println("\nPlease enter the new ID number:");
+                    int newID = s.nextInt();
+
+                    currentStudent.set_StudentID(newID);
+
+                    System.out.println("\nUpdated Student Record:\n");
+                    currentStudent.getStudentDetails();
+
+                    break;
+
+                case 2:     // IF editing Course Title
+                    System.out.println("\nPlease enter the new Course Title:");
+                    String newTitle= s.next().concat(s.nextLine());
+
+                    currentStudent.set_CourseTitle(newTitle);
+
+                    System.out.println("\nUpdated Student Record:\n");
+                    currentStudent.getStudentDetails();
+
+                    break;
+
+                case 3:     // IF editing First and Last Names
+                    System.out.println("\nPlease enter the new First Name:");
+                    String newFName= s.next();
+
+                    currentStudent.set_FirstName(newFName);
+
+                    System.out.println("\nPlease enter the new Surname:");
+                    String newLName= s.next();
+
+                    currentStudent.set_LastName(newLName);
+
+                    System.out.println("\nUpdated Student Record:\n");
+                    currentStudent.getStudentDetails();
+
+                    break;
+
+                case 4:     // IF editing Age
+                    System.out.println("\nPlease enter the new Age:");
+                    int newAge= s.nextInt();
+
+                    currentStudent.set_Age(newAge);
+
+                    System.out.println("\nUpdated Student Record:\n");
+                    currentStudent.getStudentDetails();
+
+                    break;
+
+                default:
+                    System.out.println("\nInvalid Choice! Try again.");
+                    break;
+            }
+        }
+        else
+        {
+            System.out.println("\nNo record found. Try again!");
         }
     }
 
 
 
 
-    // Console typewriter effect - essentially replaces 'SOUT'
-    private static void typewriteEffect(String output)
-    {
-        for (int i=0; i<output.length(); i++)
-        {
-            System.out.printf("%c", output.charAt(i));
-            try
-            {
-                Thread.sleep(15);  // 0.005 second pause
-            }
-            catch (InterruptedException e)
-            {
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
+    /* EXTRA METHOD - TYPE-WRITER EFFECT FOR CONSOLE */
+//    private static void typewriteEffect(String output)
+//    {
+//        for (int i=0; i<output.length(); i++)
+//        {
+//            System.out.printf("%c", output.charAt(i));
+//            try
+//            {
+//                Thread.sleep(8);  // 0.0008 second pause
+//            }
+//            catch (InterruptedException e)
+//            {
+//                Thread.currentThread().interrupt();
+//            }
+//        }
+//
+//        // EXAMPLE METHOD CALL
+//        // typewriteEffect("put your SOUT stuff here");
+//    }
 
 }
