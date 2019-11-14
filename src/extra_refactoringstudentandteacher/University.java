@@ -32,8 +32,7 @@ public class University
      * MAIN METHOD
      */
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
         // Populate array-list with sample data
         Student sampleA = new Student("Christopher", "Hill", 25, 20155985, "Computer Science");
@@ -43,18 +42,17 @@ public class University
         studentList.add(sampleB);
         studentList.add(sampleC);
 
-        int choice;
+        int choice = 0;
 
         // Loop ensures the program runs until user inputs '0' as main menu choice
-        do {
-
+        do
+        {
             System.out.println(MENU);
             choice = s.nextInt();
 
             System.out.println(SMALL_LINES);
 
-            switch (choice)
-            {
+            switch (choice) {
                 // Closes the program
                 case 0:
                     System.out.println("Ending Program................");
@@ -95,7 +93,6 @@ public class University
                     System.out.println("\nInvalid Choice! Try again.");
                     break;
             }
-
         } while (choice != 0);
 
     }

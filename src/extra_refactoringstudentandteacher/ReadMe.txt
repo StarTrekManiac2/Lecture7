@@ -6,7 +6,6 @@ students and lecturers, as well as print them out as per request of the user
 input (similar to the Calculator task).
 
 TO-DO LIST:
-    - Implement 'Delete' functionality
     - Validate all possible variables and issues:
         > General range-checking for int inputs
         > ID's must be unique (verify that an inputted ID does not match an ID within the list already)
@@ -19,6 +18,12 @@ TO-DO LIST:
         > Assign Lecturers as 'Personal Tutor' attribute for Students
         > Ability to list individual Lecturer's list of Students that they teach/tutor as per the above
 
+BUGS LIST:
+    - Student portal
+        > 'Edit' functionality
+            > Minor bug - after applying edit, an output showing the updated record does not output, even though
+                            the record is in fact updated (you can list the records again to see this).
+
 
 COMPLETED:
     - Student portal
@@ -28,3 +33,4 @@ COMPLETED:
         > 'List' functionality
         > 'Search' functionality
             > Multiple choices of search method
+        > 'Delete' functionality
