@@ -22,7 +22,9 @@ public class University
             "Press '2' to List All Students"         + "\n" +
             "Press '3' to Search for Student"        + "\n" +
             "Press '4' to Edit a Student Record"     + "\n" +
+            "Press '5' to Delete a Student Record"   + "\n" +
             "\tTo Quit, Press '0'";
+    private final static String SMALL_LINES = "\n\n\n\n";
 
 
 
@@ -49,6 +51,8 @@ public class University
             System.out.println(MENU);
             choice = s.nextInt();
 
+            System.out.println(SMALL_LINES);
+
             switch (choice)
             {
                 // Closes the program
@@ -62,13 +66,13 @@ public class University
                     createStudent();
                     break;
 
-                // List All Students in array-list via method call
+                // List All Students via method call
                 case 2:
                     System.out.println("=== LIST OF ALL STUDENTS ===");
                     listStudents();
                     break;
 
-                // Search For Student in array-list via method call
+                // Search For Student via method call
                 case 3:
                     System.out.println("=== SEARCH FOR STUDENT(S) ===");
                     findStudent();
@@ -78,6 +82,12 @@ public class University
                 case 4:
                     System.out.println("=== EDIT STUDENT RECORD ===");
                     editStudent();
+                    break;
+
+                // Delete Student Record via method call
+                case 5:
+                    System.out.println("=== DELETE STUDENT RECORD ===");
+                    deleteStudent();
                     break;
 
                 // Erroneous input
@@ -118,6 +128,7 @@ public class University
         studentList.add(newStudent);
 
         System.out.println("\nNew Student Created successfully!");
+        System.out.println(SMALL_LINES);
     }
 
 
@@ -131,6 +142,7 @@ public class University
         }
 
         System.out.println("\nCompleted listing all students!");
+        System.out.println(SMALL_LINES);
     }
 
 
@@ -145,6 +157,8 @@ public class University
         int choice = s.nextInt();
         int resultCount;
 
+        System.out.println(SMALL_LINES);
+
         switch (choice)
         {
             case 1:     // IF Searching by ID
@@ -157,7 +171,7 @@ public class University
                     if (currentStudent.get_StudentID() == id)
                     {
                         resultCount++;
-                        System.out.println(resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
+                        System.out.println("\n" + resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
                     }
                 }
 
@@ -182,7 +196,7 @@ public class University
                     if (currentStudent.get_CourseTitle().equals(title))
                     {
                         resultCount++;
-                        System.out.println(resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
+                        System.out.println("\n" + resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
                     }
                 }
 
@@ -198,7 +212,6 @@ public class University
                 break;
 
             case 3:     // IF Searching by Surname
-            {
                 System.out.println("\nEnter Surname:");
                 String lName = s.next();
                 resultCount = 0;
@@ -208,7 +221,7 @@ public class University
                     if (currentStudent.get_LastName().equals(lName))
                     {
                         resultCount++;
-                        System.out.println(resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
+                        System.out.println("\n" + resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
                     }
                 }
 
@@ -222,11 +235,13 @@ public class University
                 }
 
                 break;
-            }
+
             default:
                 System.out.println("\nInvalid Choice! Try again.");
                 break;
         }
+
+        System.out.println(SMALL_LINES);
     }
 
 
@@ -253,7 +268,7 @@ public class University
         {
             Student currentStudent = studentList.get(element);
 
-            System.out.println("CURRENT RECORD:\n" + studentList.get(element).getStudentDetails() + "\n");
+            System.out.println("\n" + currentStudent.getStudentDetails() + "\n");
             System.out.println("\nWhat do you need to edit?");
             System.out.println("\t1. Edit Student ID");
             System.out.println("\t2. Edit Course Title");
@@ -262,6 +277,8 @@ public class University
             System.out.println("\t\t or press '0' to quit!");
 
             int choice = s.nextInt();
+
+            System.out.println(SMALL_LINES);
 
             switch (choice)
             {
@@ -272,7 +289,7 @@ public class University
                     currentStudent.set_StudentID(newID);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();
+                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
 
                     break;
 
@@ -283,7 +300,7 @@ public class University
                     currentStudent.set_CourseTitle(newTitle);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();
+                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
 
                     break;
 
@@ -299,7 +316,7 @@ public class University
                     currentStudent.set_LastName(newLName);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();
+                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
 
                     break;
 
@@ -310,7 +327,7 @@ public class University
                     currentStudent.set_Age(newAge);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();
+                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
 
                     break;
 
@@ -323,6 +340,57 @@ public class University
         {
             System.out.println("\nNo record found. Try again!");
         }
+
+        System.out.println(SMALL_LINES);
+    }
+
+
+    /* DELETE A STUDENT RECORD */
+    private static void deleteStudent()
+    {
+        System.out.println("\nEnter Student ID:");
+        int id = s.nextInt();
+        boolean exists = false;
+        int element = 0;
+
+        for (int i=0; i<studentList.size(); i++)
+        {
+            if (studentList.get(i).get_StudentID() == id)
+            {
+                System.out.println("\nAttempting to delete the following record:");
+                exists = true;
+                element = i;
+            }
+        }
+
+        // IF there is match
+        if (exists)
+        {
+            Student currentStudent = studentList.get(element);
+
+            System.out.println(currentStudent.getStudentDetails() + "\n\n");
+            System.out.println("Are you sure you want to delete this record?");
+            System.out.println("WARNING - record will be permanently removed... well... until restarting the program.");
+            System.out.println("\n\tType 'Y' or 'Yes' to delete, or any other key to cancel");
+
+            String choice = s.next();
+
+            if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("yes"))
+            {
+                studentList.remove(currentStudent);
+                System.out.println("\nStudent record successfully deleted from system.");
+            }
+            else
+            {
+                System.out.println("\nCancelling deletion...");
+            }
+        }
+        else
+        {
+            System.out.println("\nNo record found. Try again!");
+        }
+
+        System.out.println(SMALL_LINES);
     }
 
 

@@ -9,6 +9,7 @@ TO-DO LIST:
     - Implement 'Delete' functionality
     - Validate all possible variables and issues:
         > General range-checking for int inputs
+        > ID's must be unique (verify that an inputted ID does not match an ID within the list already)
         > Options where required (e.g. if more than 1 result, user must choose which result to edit/delete/etc)
     - Implement all functionality for 'Lecturers' (none of which is yet implemented)
     - Implement the following ideas as a bonus:
