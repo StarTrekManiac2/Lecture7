@@ -16,12 +16,13 @@ public class University
 
     // Constants
     private final static String SMALL_LINES = "\n\n\n\n";
+    private final static String LARGE_LINES = SMALL_LINES + SMALL_LINES;
     private final static String STARTUP_MESSAGE =
             "======================================"    + "\n" +
             "=========== PROGRAM RUNNING =========="    + "\n" +
             "======================================"    + "\n" +
-            "\t1:\tStudent Portal"                      + "\n" +
-            "\t2:\tStaff Portal"                        + "\n" +
+            "Press '1' for Student Portal"                      + "\n" +
+            "Press '2' for Staff Portal"                        + "\n" +
             "\tTo Quit, press '0'";
     private final static String STUDENT_MENU =
             "======================================"    + "\n" +
@@ -32,7 +33,7 @@ public class University
             "Press '3' to Search for Student"           + "\n" +
             "Press '4' to Edit a Student Record"        + "\n" +
             "Press '5' to Delete a Student Record"      + "\n" +
-            "\tTo Quit, Press '0'";
+            "\tTo Return to Portal Menu, Press '0'";
     private final static String STAFF_MENU =
             "======================================"    + "\n" +
             "============ STAFF PORTAL ============"    + "\n" +
@@ -42,7 +43,7 @@ public class University
             "Press '3' to Search for Staff member"      + "\n" +
             "Press '4' to Edit a Staff Member Record"   + "\n" +
             "Press '5' to Delete a Staff Record"        + "\n" +
-            "\tTo Quit, Press '0'";
+            "\tTo Return to Portal Menu, Press '0'";
 
 
 
@@ -68,7 +69,7 @@ public class University
 
         int portalChoice;
 
-        // Loop ensures the program will run unless the user inputs '0' throughout
+        // Loop ensures the program will run unless the user inputs '0' at the portal menu
         do
         {
 
@@ -128,7 +129,7 @@ public class University
             {
                 // Closes the program
                 case 0:
-                    System.out.println("Ending Program................");
+                    System.out.println("Exiting Portal..............." + LARGE_LINES);
                     break;
 
                 // Create New Student via method call
@@ -189,7 +190,7 @@ public class University
             {
                 // Closes the program
                 case 0:
-                    System.out.println("Ending Program................");
+                    System.out.println("Ending Program................" + LARGE_LINES);
                     break;
 
                 // Create New Staff Member via method call

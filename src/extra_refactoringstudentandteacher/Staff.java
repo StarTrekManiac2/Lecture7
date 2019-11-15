@@ -50,7 +50,7 @@ public class Staff extends Person
         return "ID:\t\t\t\t\t" + id  +
                 "\nName:\t\t\t\t" + lName + ", " + fName +
                 "\nAge:\t\t\t\t" + age +
-                "\nJob Title:\t\t" + title;
+                "\nJob Title:\t\t\t" + title;
     }
 
 }
