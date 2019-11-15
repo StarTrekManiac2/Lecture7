@@ -1,6 +1,6 @@
 package extra_refactoringstudentandteacher;
 
-public class Lecturer extends Person
+public class Staff extends Person
 {
 
     /* *****************************
@@ -13,7 +13,7 @@ public class Lecturer extends Person
     /* *****************************
      * CONSTRUCTOR
      * *****************************/
-    private Lecturer(String fName, String lName, int age, int id, String title)
+    public Staff(String fName, String lName, int age, int id, String title)
     {
         super(fName, lName, age);   // Grabs the other details from the SuperClass (Person)
         staffID = id;
@@ -33,5 +33,24 @@ public class Lecturer extends Person
      * *****************************/
     public void set_StaffID(int id) { this.staffID = id; }
     public void set_JobTitle(String title) { this.jobTitle = title; }
+
+
+    /* *****************************
+     * OTHER METHODS
+     * *****************************/
+    // Output student details in full
+    public String getStaffDetails()
+    {
+        String fName = this.get_FirstName();
+        String lName = this.get_LastName();
+        int age = this.get_Age();
+        int id = this.get_StaffID();
+        String title = this.get_JobTitle();
+
+        return "ID:\t\t\t\t\t" + id  +
+                "\nName:\t\t\t\t" + lName + ", " + fName +
+                "\nAge:\t\t\t\t" + age +
+                "\nJob Title:\t\t" + title;
+    }
 
 }

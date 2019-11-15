@@ -6,7 +6,7 @@ public class University
     public static void main(String[] args)
     {
 
-        // Construct new instances of 'Lecturer' object and set attributes
+        // Construct new instances of 'Staff' object and set attributes
         Lecturer lecturerA = new Lecturer();
         lecturerA.setLecturer("Tom", "Watkins", 49, 211, "Personal Tutor");
         Lecturer lecturerB = new Lecturer();
