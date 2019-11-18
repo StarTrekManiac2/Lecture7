@@ -21,8 +21,8 @@ public class University
             "======================================"    + "\n" +
             "=========== PROGRAM RUNNING =========="    + "\n" +
             "======================================"    + "\n" +
-            "Press '1' for Student Portal"                      + "\n" +
-            "Press '2' for Staff Portal"                        + "\n" +
+            "Press '1' for Student Portal"              + "\n" +
+            "Press '2' for Staff Portal"                + "\n" +
             "\tTo Quit, press '0'";
     private final static String STUDENT_MENU =
             "======================================"    + "\n" +
@@ -67,6 +67,7 @@ public class University
         staffMembers.add(staffB);
         staffMembers.add(staffC);
 
+        // Initialize variable for choice input between student and staff portals
         int portalChoice;
 
         // Loop ensures the program will run unless the user inputs '0' at the portal menu
@@ -74,10 +75,11 @@ public class University
         {
 
             System.out.println(STARTUP_MESSAGE);
-            portalChoice = s.nextInt();
+            portalChoice = s.nextInt();     // User inputs choice for portal
 
             System.out.println(SMALL_LINES);
 
+            // Switch to run the chosen portal method or close program
             switch (portalChoice)
             {
                 // Closes the program
@@ -108,20 +110,19 @@ public class University
 
 
     /* ******************************************************************************************
-     * METHODS - STUDENT PORTAL
+     * METHODS - PORTALS
      */
 
-    /* ******************************************
-     * RUN STUDENT PORTAL
-     */
+    // STUDENT PORTAL MENU
     private static void studentPortal()
     {
+        // Initialize variable for choice input between all student portal options
         int choice;
 
         do
         {
             System.out.println(STUDENT_MENU);
-            choice = s.nextInt();
+            choice = s.nextInt();       // User inputs choice
 
             System.out.println(SMALL_LINES);
 
@@ -171,10 +172,7 @@ public class University
     }
 
 
-
-    /* ******************************************
-     * RUN STAFF PORTAL
-     */
+    // STAFF PORTAL MENU
     private static void staffPortal()
     {
         int choice;
@@ -186,44 +184,38 @@ public class University
 
             System.out.println(SMALL_LINES);
 
+            // Switch to run the chosen option method or go back
             switch (choice)
             {
-                // Closes the program
                 case 0:
                     System.out.println("Ending Program................" + LARGE_LINES);
                     break;
 
-                // Create New Staff Member via method call
                 case 1:
                     System.out.println("=== CREATE A NEW STAFF MEMBER ===");
                     createStaffMember();
                     break;
 
-                // List All Staff Members via method call
                 case 2:
                     System.out.println("=== LIST OF ALL STAFF MEMBERS ===");
                     listStaffMembers();
                     break;
 
-                // Search For Staff Member via method call
                 case 3:
                     System.out.println("=== SEARCH FOR STAFF MEMBER(S) ===");
                     findStaffMembers();
                     break;
 
-                // Edit Staff Member Record via method call
                 case 4:
                     System.out.println("=== EDIT STAFF MEMBER ===");
                     editStaffMember();
                     break;
 
-                // Delete Staff Member Record via method call
                 case 5:
                     System.out.println("=== DELETE STAFF MEMBER RECORD ===");
                     deleteStaffMember();
                     break;
 
-                // Erroneous input
                 default:
                     System.out.println("\nInvalid Choice! Try again.");
                     break;
@@ -232,15 +224,15 @@ public class University
     }
 
 
+
     /* ******************************************************************************************
-     * METHODS - STUDENT PORTAL
+     * SUB-METHODS - CREATING NEW RECORDS
      */
 
-    /* ******************************************
-     * CREATE A NEW STUDENT
-     */
+    // STUDENT
     private static void createStudent()
     {
+        // Asks for specified inputs and stores them to variables
         System.out.println("First Name:");
         String fName = s.next();
 
@@ -256,6 +248,7 @@ public class University
         System.out.println("Course Title:");
         String title = s.next().concat(s.nextLine());  // registers a space
 
+        // Applies inputs from variables to a new instance of Student, then add to student array-list
         Student newStudent = new Student(fName, lName, age, id, title);
         studentList.add(newStudent);
 
@@ -264,13 +257,44 @@ public class University
     }
 
 
-    /* ******************************************
-     * LIST ALL STUDENTS
+    // STAFF MEMBER
+    private static void createStaffMember()
+    {
+        System.out.println("First Name:");
+        String fName = s.next();
+
+        System.out.println("Last Name:");
+        String lName = s.next();
+
+        System.out.println("Age:");
+        int age = s.nextInt();
+
+        System.out.println("Staff ID:");
+        int id = s.nextInt();
+
+        System.out.println("Job Title:");
+        String title = s.next().concat(s.nextLine());
+
+        Staff newStaffMember = new Staff(fName, lName, age, id, title);
+        staffMembers.add(newStaffMember);
+
+        System.out.println("\nNew Staff Member created successfully!");
+        System.out.println(SMALL_LINES);
+    }
+
+
+
+    /* ******************************************************************************************
+     * SUB-METHODS - LISTING EXISTING RECORDS
      */
+
+    // STUDENTS
     private static void listStudents()
     {
+        // For loop to iterate through the student list
         for (int i=0; i<studentList.size(); i++)
         {
+            // Call 'details' method for each element in the list and output
             String currentDetails = studentList.get(i).getStudentDetails();
             System.out.println((i+1) + ".\n" + currentDetails + "\n");
         }
@@ -280,49 +304,90 @@ public class University
     }
 
 
-    /* ******************************************
-     * SEARCH FOR STUDENT
+    // STAFF MEMBERS
+    private static void listStaffMembers()
+    {
+        for (int i=0; i<staffMembers.size(); i++)
+        {
+            String currentDetails = staffMembers.get(i).getStaffDetails();
+            System.out.println((i+1) + ".\n" + currentDetails + "\n");
+        }
+
+        System.out.println("\nCompleted listing all Staff Members!");
+        System.out.println(SMALL_LINES);
+    }
+
+
+
+    /* ******************************************************************************************
+     * SUB-METHODS - SEARCHING FOR RECORD(S)
      */
+
+    // STUDENT(S)
     private static void findStudent()
     {
+        // Output menu of search methods
         System.out.println("\nHow would you like to search?");
         System.out.println("\t1. Search by Student ID");
         System.out.println("\t2. Search by Course Title");
         System.out.println("\t3. Search by Surname");
+        System.out.println("\t\t or Quit with '0'");
 
+        // User inputs a choice
         int choice = s.nextInt();
+
+        // Declare variable for counting the results that will match the criteria later
         int resultCount;
 
         System.out.println(SMALL_LINES);
 
+        // Switch to run the chosen search method or go back
         switch (choice)
         {
-            case 1:     // IF Searching by ID
+            // Returns to student menu
+            case 0:
+                break;
+
+            // Search by ID
+            case 1:
+                // Ask user to input Student ID to search for
                 System.out.println("\nEnter Student ID:");
                 int id = s.nextInt();
+
+                // Initialize count variable to 0
                 resultCount = 0;
 
+                // For-each loop to iterate through each record in student array-list
                 for (Student currentStudent : studentList)
                 {
+                    // If the current student ID matches the user's inputted ID...
                     if (currentStudent.get_StudentID() == id)
                     {
+                        // Increment the count to add the match to the total matches
                         resultCount++;
+
+                        // Output details of currently matching record
                         System.out.println("\n" + resultCount + ".\n" + currentStudent.getStudentDetails() + "\n");
                     }
                 }
 
+                // If there are no matches found...
                 if (resultCount == 0)
                 {
+                    // Output the fact
                     System.out.println("\nNo Results Found!");
                 }
+                // Else...
                 else
                 {
+                    // Output number of results found
                     System.out.println("\nFound " + resultCount + " Results!");
                 }
 
                 break;
 
-            case 2:     // IF Searching by Course Title
+            // Search by Course Title
+            case 2:
                 System.out.println("\nEnter Course Title:");
                 String title = s.next().concat(s.nextLine());
                 resultCount = 0;
@@ -347,7 +412,8 @@ public class University
 
                 break;
 
-            case 3:     // IF Searching by Surname
+            // Search by Surname
+            case 3:
                 System.out.println("\nEnter Surname:");
                 String lName = s.next();
                 resultCount = 0;
@@ -380,69 +446,197 @@ public class University
         System.out.println(SMALL_LINES);
     }
 
+    // STAFF MEMBER(S)
+    private static void findStaffMembers()
+    {
+        System.out.println("\nHow would you like to search?");
+        System.out.println("\t1. Search by Staff ID");
+        System.out.println("\t2. Search byJob Title");
+        System.out.println("\t3. Search by Surname");
+        System.out.println("\t\t or Quit with '0'");
 
-    /* ******************************************
-     * EDIT A STUDENT
+        int choice = s.nextInt();
+        int resultCount;
+
+        System.out.println(SMALL_LINES);
+
+        switch (choice)
+        {
+            case 0:
+                break;
+
+            case 1:
+                System.out.println("\nEnter Staff ID:");
+                int id = s.nextInt();
+                resultCount = 0;
+
+                for (Staff currentStaffMember : staffMembers)
+                {
+                    if (currentStaffMember.get_StaffID() == id)
+                    {
+                        resultCount++;
+                        System.out.println("\n" + resultCount + ".\n" + currentStaffMember.getStaffDetails() + "\n");
+                    }
+                }
+
+                if (resultCount == 0)
+                {
+                    System.out.println("\nNo Results Found!");
+                }
+                else
+                {
+                    System.out.println("\nFound " + resultCount + " Results!");
+                }
+
+                break;
+
+            case 2:
+                System.out.println("\nEnter Job Title:");
+                String title = s.next().concat(s.nextLine());
+                resultCount = 0;
+
+                for (Staff currentStaffMember : staffMembers)
+                {
+                    if (currentStaffMember.get_JobTitle().equals(title))
+                    {
+                        resultCount++;
+                        System.out.println("\n" + resultCount + ".\n" + currentStaffMember.getStaffDetails() + "\n");
+                    }
+                }
+
+                if (resultCount == 0)
+                {
+                    System.out.println("\nNo Results Found!");
+                }
+                else
+                {
+                    System.out.println("\nFound " + resultCount + " Results!");
+                }
+
+                break;
+
+            case 3:
+                System.out.println("\nEnter Surname:");
+                String lName = s.next();
+                resultCount = 0;
+
+                for (Staff currentStaffMember : staffMembers)
+                {
+                    if (currentStaffMember.get_LastName().equals(lName))
+                    {
+                        resultCount++;
+                        System.out.println("\n" + resultCount + ".\n" + currentStaffMember.getStaffDetails() + "\n");
+                    }
+                }
+
+                if (resultCount == 0)
+                {
+                    System.out.println("\nNo Results Found!");
+                }
+                else
+                {
+                    System.out.println("\nFound " + resultCount + " Results!");
+                }
+
+                break;
+
+            default:
+                System.out.println("\nInvalid Choice! Try again.");
+                break;
+        }
+
+        System.out.println(SMALL_LINES);
+    }
+
+
+
+    /* ******************************************************************************************
+     * SUB-METHODS - EDITING EXISTING RECORD
      */
+
+    // STUDENT
     private static void editStudent()
     {
+        // Ask for Student ID input from user
         System.out.println("\nEnter Student ID:");
         int id = s.nextInt();
+
+        // Boolean initialization to check a record exists before editing
         boolean exists = false;
+
+        // Initialize variable for storing element value of the list for reuse later
         int element = 0;
 
+        // For loop to iterate through the student records
         for (int i=0; i<studentList.size(); i++)
         {
+            // If Student ID of current record matches user-inputted ID
             if (studentList.get(i).get_StudentID() == id)
             {
                 System.out.println("\nFound record successfully!");
+
+                // Due to a match, set boolean variable to true
                 exists = true;
+
+                // Save element value to current element of the array
                 element = i;
             }
         }
 
-        // IF there is a match
+        // IF a match was found
         if (exists)
         {
+            // Fetch the record from the array-list using the saved element value
             Student currentStudent = studentList.get(element);
 
+            // Output menu of options for user input for editing the record
             System.out.println("\n" + currentStudent.getStudentDetails() + "\n");
             System.out.println("\nWhat do you need to edit?");
             System.out.println("\t1. Edit Student ID");
             System.out.println("\t2. Edit Course Title");
             System.out.println("\t3. Edit Names");
             System.out.println("\t4. Edit Age");
-            System.out.println("\t\t or press '0' to quit!");
+            System.out.println("\t\t or Quit with '0'");
 
+            // User inputs choice
             int choice = s.nextInt();
 
             System.out.println(SMALL_LINES);
 
+            // Switch to run the chosen edit option or go back
             switch (choice)
             {
-                case 1:     // IF editing Student ID
+                // Return to student portal
+                case 0:
+                    break;
+
+                // Edit Student ID
+                case 1:
+                    // Ask for user input of replacement ID
                     System.out.println("\nPlease enter the new ID number:");
                     int newID = s.nextInt();
 
+                    // Apply new ID to current ID of the student
                     currentStudent.set_StudentID(newID);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
-
                     break;
 
-                case 2:     // IF editing Course Title
+                // Edit Course Title
+                case 2:
+                    // Ask for user input of replacement Course Title
                     System.out.println("\nPlease enter the new Course Title:");
                     String newTitle= s.next().concat(s.nextLine());
 
+                    // Apply new title to current title of the student
                     currentStudent.set_CourseTitle(newTitle);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
-
                     break;
 
-                case 3:     // IF editing First and Last Names
+                // Edit First and Last Names
+                case 3:
+                    // Ask for user input for new names and replace current student names
                     System.out.println("\nPlease enter the new First Name:");
                     String newFName= s.next();
 
@@ -454,19 +648,115 @@ public class University
                     currentStudent.set_LastName(newLName);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
-
                     break;
 
-                case 4:     // IF editing Age
+                // Edit Age
+                case 4:
+                    // Ask for user input of replacement Age
                     System.out.println("\nPlease enter the new Age:");
                     int newAge= s.nextInt();
 
+                    // Apply new age to current age of the student
                     currentStudent.set_Age(newAge);
 
                     System.out.println("\nUpdated Student Record:\n");
-                    currentStudent.getStudentDetails();     // For some reason, won't output details, but details are updated
+                    break;
 
+                // Erroneous input
+                default:
+                    System.out.println("\nInvalid Choice! Try again.");
+                    break;
+            }
+        }
+        // ELSE if no record was found...
+        else
+        {
+            // Output the fact
+            System.out.println("\nNo record found. Try again!");
+        }
+
+        System.out.println(SMALL_LINES);
+    }
+
+
+    // STAFF MEMBER
+    private static void editStaffMember()
+    {
+        System.out.println("\nEnter Staff ID:");
+        int id = s.nextInt();
+        boolean exists = false;
+        int element = 0;
+
+        for (int i=0; i<staffMembers.size(); i++)
+        {
+            if (staffMembers.get(i).get_StaffID() == id)
+            {
+                System.out.println("\nFound record successfully!");
+                exists = true;
+                element = i;
+            }
+        }
+
+        if (exists)
+        {
+            Staff currentStaffMember = staffMembers.get(element);
+
+            System.out.println("\n" + currentStaffMember.getStaffDetails() + "\n");
+            System.out.println("\nWhat do you need to edit?");
+            System.out.println("\t1. Edit Staff ID");
+            System.out.println("\t2. Edit Job Title");
+            System.out.println("\t3. Edit Names");
+            System.out.println("\t4. Edit Age");
+            System.out.println("\t\t or Quit with '0'");
+
+            int choice = s.nextInt();
+
+            System.out.println(SMALL_LINES);
+
+            switch (choice)
+            {
+                case 0:
+                    break;
+
+                case 1:
+                    System.out.println("\nPlease enter the new ID number:");
+                    int newID = s.nextInt();
+
+                    currentStaffMember.set_StaffID(newID);
+
+                    System.out.println("\nUpdated Staff Member Record:\n");
+                    break;
+
+                case 2:
+                    System.out.println("\nPlease enter the new Job Title:");
+                    String newTitle= s.next().concat(s.nextLine());
+
+                    currentStaffMember.set_JobTitle(newTitle);
+
+                    System.out.println("\nUpdated Staff Member Record:\n");
+                    break;
+
+                case 3:
+                    System.out.println("\nPlease enter the new First Name:");
+                    String newFName= s.next();
+
+                    currentStaffMember.set_FirstName(newFName);
+
+                    System.out.println("\nPlease enter the new Surname:");
+                    String newLName= s.next();
+
+                    currentStaffMember.set_LastName(newLName);
+
+                    System.out.println("\nUpdated Staff Member Record:\n");
+                    break;
+
+                case 4:
+                    System.out.println("\nPlease enter the new Age:");
+                    int newAge= s.nextInt();
+
+                    currentStaffMember.set_Age(newAge);
+
+                    System.out.println("\nUpdated Staff Member Record:\n");
                     break;
 
                 default:
@@ -483,9 +773,12 @@ public class University
     }
 
 
-    /* ******************************************
-     * DELETE A STUDENT
+
+    /* ******************************************************************************************
+     * SUB-METHODS - DELETING EXISTING RECORD
      */
+
+    // STUDENT
     private static void deleteStudent()
     {
         System.out.println("\nEnter Student ID:");
@@ -534,261 +827,7 @@ public class University
     }
 
 
-
-    /* ******************************************************************************************
-     * METHODS - STAFF PORTAL
-     */
-
-    /* ******************************************
-     * CREATE A NEW STUDENT
-     */
-    private static void createStaffMember()
-    {
-        System.out.println("First Name:");
-        String fName = s.next();
-
-        System.out.println("Last Name:");
-        String lName = s.next();
-
-        System.out.println("Age:");
-        int age = s.nextInt();
-
-        System.out.println("Staff ID:");
-        int id = s.nextInt();
-
-        System.out.println("Job Title:");
-        String title = s.next().concat(s.nextLine());  // registers a space
-
-        Staff newStaffMember = new Staff(fName, lName, age, id, title);
-        staffMembers.add(newStaffMember);
-
-        System.out.println("\nNew Staff Member created successfully!");
-        System.out.println(SMALL_LINES);
-    }
-
-
-    /* ******************************************
-     * LIST ALL STUDENTS
-     */
-    private static void listStaffMembers()
-    {
-        for (int i=0; i<staffMembers.size(); i++)
-        {
-            String currentDetails = staffMembers.get(i).getStaffDetails();
-            System.out.println((i+1) + ".\n" + currentDetails + "\n");
-        }
-
-        System.out.println("\nCompleted listing all Staff Members!");
-        System.out.println(SMALL_LINES);
-    }
-
-
-    /* ******************************************
-     * SEARCH FOR STUDENT
-     */
-    private static void findStaffMembers()
-    {
-        System.out.println("\nHow would you like to search?");
-        System.out.println("\t1. Search by Staff ID");
-        System.out.println("\t2. Search byJob Title");
-        System.out.println("\t3. Search by Surname");
-
-        int choice = s.nextInt();
-        int resultCount;
-
-        System.out.println(SMALL_LINES);
-
-        switch (choice)
-        {
-            case 1:     // IF Searching by ID
-                System.out.println("\nEnter Staff ID:");
-                int id = s.nextInt();
-                resultCount = 0;
-
-                for (Staff currentStaffMember : staffMembers)
-                {
-                    if (currentStaffMember.get_StaffID() == id)
-                    {
-                        resultCount++;
-                        System.out.println("\n" + resultCount + ".\n" + currentStaffMember.getStaffDetails() + "\n");
-                    }
-                }
-
-                if (resultCount == 0)
-                {
-                    System.out.println("\nNo Results Found!");
-                }
-                else
-                {
-                    System.out.println("\nFound " + resultCount + " Results!");
-                }
-
-                break;
-
-            case 2:     // IF Searching by Course Title
-                System.out.println("\nEnter Job Title:");
-                String title = s.next().concat(s.nextLine());
-                resultCount = 0;
-
-                for (Staff currentStaffMember : staffMembers)
-                {
-                    if (currentStaffMember.get_JobTitle().equals(title))
-                    {
-                        resultCount++;
-                        System.out.println("\n" + resultCount + ".\n" + currentStaffMember.getStaffDetails() + "\n");
-                    }
-                }
-
-                if (resultCount == 0)
-                {
-                    System.out.println("\nNo Results Found!");
-                }
-                else
-                {
-                    System.out.println("\nFound " + resultCount + " Results!");
-                }
-
-                break;
-
-            case 3:     // IF Searching by Surname
-                System.out.println("\nEnter Surname:");
-                String lName = s.next();
-                resultCount = 0;
-
-                for (Staff currentStaffMember : staffMembers)
-                {
-                    if (currentStaffMember.get_LastName().equals(lName))
-                    {
-                        resultCount++;
-                        System.out.println("\n" + resultCount + ".\n" + currentStaffMember.getStaffDetails() + "\n");
-                    }
-                }
-
-                if (resultCount == 0)
-                {
-                    System.out.println("\nNo Results Found!");
-                }
-                else
-                {
-                    System.out.println("\nFound " + resultCount + " Results!");
-                }
-
-                break;
-
-            default:
-                System.out.println("\nInvalid Choice! Try again.");
-                break;
-        }
-
-        System.out.println(SMALL_LINES);
-    }
-
-
-    /* ******************************************
-     * EDIT A STUDENT
-     */
-    private static void editStaffMember()
-    {
-        System.out.println("\nEnter Staff ID:");
-        int id = s.nextInt();
-        boolean exists = false;
-        int element = 0;
-
-        for (int i=0; i<staffMembers.size(); i++)
-        {
-            if (staffMembers.get(i).get_StaffID() == id)
-            {
-                System.out.println("\nFound record successfully!");
-                exists = true;
-                element = i;
-            }
-        }
-
-        // IF there is a match
-        if (exists)
-        {
-            Staff currentStaffMember = staffMembers.get(element);
-
-            System.out.println("\n" + currentStaffMember.getStaffDetails() + "\n");
-            System.out.println("\nWhat do you need to edit?");
-            System.out.println("\t1. Edit Staff ID");
-            System.out.println("\t2. Edit Job Title");
-            System.out.println("\t3. Edit Names");
-            System.out.println("\t4. Edit Age");
-            System.out.println("\t\t or press '0' to quit!");
-
-            int choice = s.nextInt();
-
-            System.out.println(SMALL_LINES);
-
-            switch (choice)
-            {
-                case 1:     // IF editing Student ID
-                    System.out.println("\nPlease enter the new ID number:");
-                    int newID = s.nextInt();
-
-                    currentStaffMember.set_StaffID(newID);
-
-                    System.out.println("\nUpdated Staff Member Record:\n");
-                    currentStaffMember.getStaffDetails();     // For some reason, won't output details, but details are updated
-
-                    break;
-
-                case 2:     // IF editing Course Title
-                    System.out.println("\nPlease enter the new Job Title:");
-                    String newTitle= s.next().concat(s.nextLine());
-
-                    currentStaffMember.set_JobTitle(newTitle);
-
-                    System.out.println("\nUpdated Staff Member Record:\n");
-                    currentStaffMember.getStaffDetails();     // For some reason, won't output details, but details are updated
-
-                    break;
-
-                case 3:     // IF editing First and Last Names
-                    System.out.println("\nPlease enter the new First Name:");
-                    String newFName= s.next();
-
-                    currentStaffMember.set_FirstName(newFName);
-
-                    System.out.println("\nPlease enter the new Surname:");
-                    String newLName= s.next();
-
-                    currentStaffMember.set_LastName(newLName);
-
-                    System.out.println("\nUpdated Staff Member Record:\n");
-                    currentStaffMember.getStaffDetails();     // For some reason, won't output details, but details are updated
-
-                    break;
-
-                case 4:     // IF editing Age
-                    System.out.println("\nPlease enter the new Age:");
-                    int newAge= s.nextInt();
-
-                    currentStaffMember.set_Age(newAge);
-
-                    System.out.println("\nUpdated Staff Member Record:\n");
-                    currentStaffMember.getStaffDetails();     // For some reason, won't output details, but details are updated
-
-                    break;
-
-                default:
-                    System.out.println("\nInvalid Choice! Try again.");
-                    break;
-            }
-        }
-        else
-        {
-            System.out.println("\nNo record found. Try again!");
-        }
-
-        System.out.println(SMALL_LINES);
-    }
-
-
-    /* ******************************************
-     * DELETE A STUDENT
-     */
+    // STAFF MEMBER
     private static void deleteStaffMember()
     {
         System.out.println("\nEnter Staff ID:");
@@ -835,7 +874,6 @@ public class University
 
         System.out.println(SMALL_LINES);
     }
-
 
 
 

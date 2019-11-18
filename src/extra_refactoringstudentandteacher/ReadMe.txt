@@ -20,9 +20,9 @@ TO-DO LIST:
 
 BUGS LIST:
     - Student portal
-        > 'Edit' functionality
-            > Minor bug - after applying edit, an output showing the updated record does not output, even though
-                            the record is in fact updated (you can list the records again to see this).
+        >
+    - Staff portal
+        >
 
 
 COMPLETED:
